@@ -132,6 +132,26 @@ docker compose -p content-factory-v1 -f automation\content-factory-v1\docker-com
 - утверждение плана не создаёт публикации автоматически;
 - публикация отделена от генерации и согласования.
 
+## Скриншоты работающего проекта
+
+### Рабочие workflow n8n
+
+На экране видны реальные опубликованные workflow Content Factory. Содержимое credentials и параметры доступа не показываются.
+
+![Список workflow n8n](docs/n8n-workflows-screen.png)
+
+### Передача идеи из Notion в Content Factory
+
+Canvas показывает рабочую цепочку: запуск по расписанию → получение идеи из Notion → подготовка запроса → создание задания API → обновление статуса.
+
+![Workflow Notion idea to Codex](docs/n8n-workflow-notion-to-codex.png)
+
+### Локальный API Content Factory
+
+Swagger подтверждает, что локальный API предоставляет операции создания заданий, контент-планов, ревизий, ручных правок, утверждения, планирования и симуляции публикации.
+
+![Swagger API Content Factory](docs/content-factory-api-swagger.png)
+
 ## Границы MVP
 
 MVP не является универсальной SMM-платформой. В текущую версию не входят масштабирование, аналитика эффективности публикаций, подключение новых каналов и полноценный self-service для внешних клиентов.
