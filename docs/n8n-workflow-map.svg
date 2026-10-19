@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+  <rect width="1400" height="760" fill="#f7fafc"/>
+  <style>
+    .box { fill:#ffffff; stroke:#15324b; stroke-width:3; rx:18; }
+    .title { font:700 28px Arial,sans-serif; fill:#15324b; }
+    .text { font:500 21px Arial,sans-serif; fill:#15324b; }
+    .small { font:400 17px Arial,sans-serif; fill:#456070; }
+    .arrow { stroke:#f28c28; stroke-width:5; marker-end:url(#arrow); fill:none; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#f28c28"/>
+    </marker>
+  </defs>
+  <text x="70" y="70" class="title">Content Factory v1 — n8n orchestration</text>
+  <text x="70" y="105" class="small">Обезличенная схема для публичного README. Credentials и параметры окружения не входят в репозиторий.</text>
+
+  <rect x="70" y="180" width="250" height="130" class="box"/>
+  <text x="195" y="225" text-anchor="middle" class="title">Telegram</text>
+  <text x="195" y="265" text-anchor="middle" class="text">идея / материал</text>
+
+  <rect x="410" y="180" width="250" height="130" class="box"/>
+  <text x="535" y="225" text-anchor="middle" class="title">Notion</text>
+  <text x="535" y="265" text-anchor="middle" class="text">Радар контента</text>
+
+  <rect x="750" y="180" width="250" height="130" class="box"/>
+  <text x="875" y="225" text-anchor="middle" class="title">n8n</text>
+  <text x="875" y="265" text-anchor="middle" class="text">маршрутизация</text>
+
+  <rect x="1090" y="180" width="250" height="130" class="box"/>
+  <text x="1215" y="225" text-anchor="middle" class="title">Codex Agent</text>
+  <text x="1215" y="265" text-anchor="middle" class="text">черновик / план</text>
+
+  <path d="M320 245 H400" class="arrow"/>
+  <path d="M660 245 H740" class="arrow"/>
+  <path d="M1000 245 H1080" class="arrow"/>
+
+  <rect x="410" y="480" width="250" height="130" class="box"/>
+  <text x="535" y="525" text-anchor="middle" class="title">Content Factory</text>
+  <text x="535" y="565" text-anchor="middle" class="text">API + Worker + DB</text>
+
+  <rect x="750" y="480" width="250" height="130" class="box"/>
+  <text x="875" y="525" text-anchor="middle" class="title">Согласование</text>
+  <text x="875" y="565" text-anchor="middle" class="text">ревизии + lock</text>
+
+  <rect x="1090" y="480" width="250" height="130" class="box"/>
+  <text x="1215" y="525" text-anchor="middle" class="title">Publisher</text>
+  <text x="1215" y="565" text-anchor="middle" class="text">публикация по команде</text>
+
+  <path d="M1215 310 V390 H535 V470" class="arrow"/>
+  <path d="M660 545 H740" class="arrow"/>
+  <path d="M1000 545 H1080" class="arrow"/>
+  <path d="M1215 470 V390 H535 V320" class="arrow"/>
+  <text x="70" y="700" class="small">Отдельные этапы: генерация → проверка → ручная правка → утверждение → планирование → публикация.</text>
+</svg>
