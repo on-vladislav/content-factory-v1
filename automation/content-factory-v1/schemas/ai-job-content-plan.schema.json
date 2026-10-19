@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://onishchukvlad.ru/schemas/content-factory/ai-job-content-plan-v1.json",
+  "title": "Content Factory Content Plan AI Job v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "job_id", "type", "status", "attempt", "max_attempts", "lease_token", "payload"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "content-factory/ai-job-v1"},
+    "job_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9_-]{5,63}$"},
+    "type": {"type": "string", "pattern": "^(GENERATE_CONTENT_PLAN|REVISE_CONTENT_PLAN)$"},
+    "status": {"type": "string", "const": "CLAIMED"},
+    "attempt": {"type": "integer", "minimum": 1},
+    "max_attempts": {"type": "integer", "minimum": 1, "maximum": 10},
+    "lease_token": {"type": "string", "minLength": 16, "maxLength": 256},
+    "lease_expires_at": {"type": "string"},
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan_id", "revision", "sources", "period", "goal", "audience", "primary_channel", "timezone", "item_count", "additional_instruction", "correction_comment", "current_plan_json"],
+      "properties": {
+        "plan_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{5,79}$"},
+        "revision": {"type": "integer", "minimum": 1},
+        "sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["primary", "supporting"],
+          "properties": {
+            "primary": {"type": "string", "minLength": 1},
+            "supporting": {"type": "array", "items": {"type": "string"}, "maxItems": 20}
+          }
+        },
+        "period": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end"],
+          "properties": {
+            "start": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+            "end": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          }
+        },
+        "goal": {"type": "string", "minLength": 1, "maxLength": 1000},
+        "audience": {"type": "string", "minLength": 1, "maxLength": 500},
+        "primary_channel": {"type": "string", "const": "telegram"},
+        "timezone": {"type": "string", "const": "Europe/Moscow"},
+        "item_count": {"type": "integer", "minimum": 1, "maximum": 31},
+        "additional_instruction": {"type": "string", "maxLength": 4000},
+        "correction_comment": {"type": "string", "maxLength": 4000},
+        "current_plan_json": {"type": "string", "maxLength": 100000}
+      }
+    }
+  }
+}
