@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://onishchukvlad.ru/schemas/content-factory/codex-post-result-v1.json",
+  "title": "Content Factory Codex Post Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "post_id", "job_id", "revision", "status", "manual_lock", "sources", "editorial_brief", "master_content", "platforms", "review"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "content-factory/post-package-v1"},
+    "post_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{5,79}$"},
+    "job_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9_-]{5,63}$"},
+    "revision": {"type": "integer", "minimum": 1},
+    "status": {"type": "string", "const": "REVIEW"},
+    "manual_lock": {"type": "boolean", "const": false},
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "supporting"],
+      "properties": {
+        "primary": {"type": "string", "minLength": 1},
+        "supporting": {"type": "array", "items": {"type": "string"}, "maxItems": 20}
+      }
+    },
+    "editorial_brief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audience", "problem", "main_idea", "goal", "cta"],
+      "properties": {
+        "audience": {"type": "string", "minLength": 1},
+        "problem": {"type": "string", "minLength": 1},
+        "main_idea": {"type": "string", "minLength": 1},
+        "goal": {"type": "string", "minLength": 1},
+        "cta": {"type": "string"}
+      }
+    },
+    "master_content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "content"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1, "maxLength": 160},
+        "content": {"type": "string", "minLength": 1}
+      }
+    },
+    "platforms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["telegram"],
+      "properties": {
+        "telegram": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["title", "content", "format", "visible_characters", "hashtags", "publication_status", "scheduled_at"],
+          "properties": {
+            "title": {"type": "string", "minLength": 1, "maxLength": 160},
+            "content": {"type": "string", "minLength": 1, "maxLength": 1200},
+            "format": {"type": "string", "const": "HTML"},
+            "visible_characters": {"type": "integer", "minimum": 1, "maximum": 1024},
+            "hashtags": {"type": "array", "items": {"type": "string", "pattern": "^#"}, "maxItems": 2},
+            "publication_status": {"type": "string", "const": "NOT_AUTHORIZED"},
+            "scheduled_at": {"type": "null"}
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["facts_verified", "needs_clarification", "clarification_questions", "warnings"],
+      "properties": {
+        "facts_verified": {"type": "boolean"},
+        "needs_clarification": {"type": "boolean"},
+        "clarification_questions": {"type": "array", "items": {"type": "string"}},
+        "warnings": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}
