@@ -94,6 +94,15 @@ n8n используется как оркестратор связки Telegram
 
 ### Запуск локального API и PostgreSQL
 
+В PowerShell задайте собственные локальные значения (для пароля используйте только латинские буквы и цифры):
+
+```powershell
+$env:CONTENT_FACTORY_DB_PASSWORD = 'придумайте_пароль_латиницей_и_цифрами'
+$env:CONTENT_FACTORY_WORKER_TOKEN = 'придумайте_локальный_токен'
+```
+
+Затем в том же окне выполните:
+
 ```powershell
 docker compose -p content-factory-v1 -f automation\content-factory-v1\docker-compose.yml up -d --build
 ```
@@ -103,6 +112,8 @@ docker compose -p content-factory-v1 -f automation\content-factory-v1\docker-com
 - API: `http://127.0.0.1:8765`;
 - Swagger: `http://127.0.0.1:8765/docs`;
 - PostgreSQL: `127.0.0.1:55432`.
+
+Эта команда запускает API и базу данных. Worker, Codex CLI и интеграции Notion, n8n и Telegram настраиваются отдельно; весь рабочий контур не разворачивается одной командой.
 
 ### Локальные тесты
 
@@ -190,18 +201,20 @@ Production-интеграции с Notion, n8n и Telegram требуют соб
 
 ## Проектный скилл
 
-Инструкции для работы Claude Code с контентным контуром находятся в [`.agents/skills/content-production/SKILL.md`](.agents/skills/content-production/SKILL.md).
+Скилл сопровождения MVP: [`.claude/skills/content-factory-mvp/SKILL.md`](.claude/skills/content-factory-mvp/SKILL.md). Он описывает запуск, проверку и безопасное изменение проекта.
 
-Скилл описывает источники, статусы, редакционные ограничения, правила подготовки публикаций, JSON-пакеты и проверку результата.
+Отдельный [скилл контентного производства](.agents/skills/content-production/SKILL.md) описывает источники, редакционные ограничения и подготовку публикаций.
+
+Полное описание задачи и критериев MVP: [описание итогового проекта](docs/final-project-description.md).
 
 ## Структура проекта
 
 ```text
 automation/content-factory-v1/   API, Worker, схемы и тесты MVP
-automation/n8n-workflows/        workflow интеграции и публикации
 automation/telegram-publisher/   отдельный Telegram publisher
-reports/                         примеры контентных пакетов и результатов
 .agents/skills/                  проектный скилл
+.claude/skills/                  скилл сопровождения MVP
+docs/                            описание проекта и скриншоты
 ```
 
 ## Автор

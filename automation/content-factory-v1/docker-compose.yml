@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16
+    container_name: content-factory-v1-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: content_factory
+      POSTGRES_USER: content_factory
+      POSTGRES_PASSWORD: ${CONTENT_FACTORY_DB_PASSWORD:?Set CONTENT_FACTORY_DB_PASSWORD}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - content_factory_postgres:/var/lib/postgresql/data
+      - ./database/init/001-schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+      - ./database/migrations/002-content-plans.sql:/docker-entrypoint-initdb.d/002-content-plans.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U content_factory -d content_factory"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./api
+    container_name: content-factory-v1-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://content_factory:${CONTENT_FACTORY_DB_PASSWORD}@db:5432/content_factory
+      CONTENT_FACTORY_WORKER_TOKEN: ${CONTENT_FACTORY_WORKER_TOKEN:?Set CONTENT_FACTORY_WORKER_TOKEN}
+      CONTENT_FACTORY_TIMEZONE: Europe/Moscow
+    ports:
+      - "127.0.0.1:8765:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  content_factory_postgres:
+
+
