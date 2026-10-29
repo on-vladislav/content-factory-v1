@@ -138,19 +138,49 @@ docker compose -p content-factory-v1 -f automation\content-factory-v1\docker-com
 
 На экране видны реальные опубликованные workflow Content Factory. Содержимое credentials и параметры доступа не показываются.
 
-![Список workflow n8n](docs/n8n-workflows-screen.png)
+![Список workflow n8n](docs/01-n8n-workflows.png)
 
 ### Передача идеи из Notion в Content Factory
 
 Canvas показывает рабочую цепочку: запуск по расписанию → получение идеи из Notion → подготовка запроса → создание задания API → обновление статуса.
 
-![Workflow Notion idea to Codex](docs/n8n-workflow-notion-to-codex.png)
+![Workflow Notion idea to Codex](docs/02-n8n-notion-to-codex.png)
 
 ### Локальный API Content Factory
 
 Swagger подтверждает, что локальный API предоставляет операции создания заданий, контент-планов, ревизий, ручных правок, утверждения, планирования и симуляции публикации.
 
-![Swagger API Content Factory](docs/content-factory-api-swagger.png)
+![Swagger API Content Factory](docs/03-content-factory-api-swagger.png)
+
+### Сгенерированный Telegram-текст в Notion
+
+Карточка содержит результат генерации, который можно проверить перед ручной правкой и утверждением.
+
+![Сгенерированный Telegram-текст в Notion](docs/04-notion-generated-post.png)
+
+### Ручная правка и MANUAL_LOCK
+
+После изменения текста вручную в карточке включён `Manual Lock`. Это защищает ручную версию от перезаписи следующим результатом Codex.
+
+![Ручная правка и MANUAL_LOCK](docs/05-notion-manual-lock.png)
+
+### Утверждение материала
+
+Карточка переведена в статус `Утверждено`, следующий этап — публикация.
+
+![Утверждение материала](docs/06-notion-approved.png)
+
+### Публикация в тестовом Telegram-канале
+
+Материал опубликован в тестовом канале после отдельного утверждения.
+
+![Публикация в тестовом Telegram-канале](docs/07-telegram-test-channel.png)
+
+### Итоговый статус в Notion
+
+После публикации Notion получил статус `Опубликовано` и ссылку на сообщение.
+
+![Итоговый статус в Notion](docs/08-notion-published.png)
 
 ## Границы MVP
 
