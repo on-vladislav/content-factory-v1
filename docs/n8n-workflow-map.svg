@@ -43,13 +43,13 @@
   <text x="1215" y="538" text-anchor="middle" class="box-title">Publisher</text>
   <text x="1215" y="577" text-anchor="middle" class="box-text">публикация по команде</text>
   <path d="M1215 335 V415 H535 V490" class="route"/><circle cx="1215" cy="335" r="5" class="route-dot"/><circle cx="535" cy="490" r="5" class="route-dot"/>
-  <text x="875" y="405" text-anchor="middle" class="label">результат генерации</text>
+  <text x="875" y="395" text-anchor="middle" class="label">результат генерации</text>
   <path d="M660 555 H750" class="route"/><circle cx="660" cy="555" r="5" class="route-dot"/><circle cx="750" cy="555" r="5" class="route-dot"/>
-  <text x="705" y="538" text-anchor="middle" class="label">ревизия</text>
+  <text x="705" y="465" text-anchor="middle" class="label">ревизия</text>
   <path d="M1000 555 H1090" class="route"/><circle cx="1000" cy="555" r="5" class="route-dot"/><circle cx="1090" cy="555" r="5" class="route-dot"/>
-  <text x="1045" y="538" text-anchor="middle" class="label">утверждение</text>
+  <text x="1045" y="465" text-anchor="middle" class="label">утверждение</text>
   <path d="M1215 490 V415 H535 V335" class="route" stroke-dasharray="8 8"/><circle cx="1215" cy="490" r="5" class="route-dot"/><circle cx="535" cy="335" r="5" class="route-dot"/>
-  <text x="875" y="438" text-anchor="middle" class="label">статус и ссылка в Notion</text>
+  <text x="875" y="450" text-anchor="middle" class="label">статус и ссылка в Notion</text>
   <text x="70" y="700" class="note">Генерация → проверка → ручная правка → утверждение → планирование → публикация</text>
 </svg>
 
