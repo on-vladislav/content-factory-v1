@@ -1,0 +1,9 @@
+.codex-content-factory-ed25519
+.aws/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.venv/
+

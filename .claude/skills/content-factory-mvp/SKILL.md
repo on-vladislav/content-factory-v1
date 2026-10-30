@@ -9,7 +9,7 @@ description: Запускать, проверять и сопровождать 
 
 ## Локальный запуск и проверка
 
-Из корня репозитория запусти `docker compose -p content-factory-v1 -f automation/content-factory-v1/docker-compose.yml up -d --build`. Проверь `http://127.0.0.1:8765/docs`. Тесты Worker: `python -m unittest discover -s automation/content-factory-v1/worker/tests -v`. Для полной генерации нужны отдельно настроенные Codex CLI и рабочее окружение; запуск API сам по себе не запускает Worker или интеграции.
+Создай `.env` из `.env.example` и задай свои локальные значения, как описано в README. Из корня репозитория запусти `docker compose --env-file .env -p content-factory-v1 -f automation/content-factory-v1/docker-compose.yml up -d --build`. Проверь `http://127.0.0.1:8765/docs`. Тесты Worker: `python -m unittest discover -s automation/content-factory-v1/worker/tests -v`. Для полной генерации нужны отдельно настроенные Codex CLI и рабочее окружение; запуск API сам по себе не запускает Worker или интеграции.
 
 При ошибках проверь состояние контейнеров и их журналы, доступность портов, конфигурацию и зависимости. Не выводи секреты в отчёты и публичные файлы. Не используй `down -v` без отдельного разрешения: это удаляет данные базы.
 

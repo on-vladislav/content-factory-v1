@@ -92,19 +92,21 @@ n8n используется как оркестратор связки Telegram
 - Python 3.11+ для локальных тестов;
 - Codex CLI для полного режима генерации.
 
+Зависимости API перечислены в `automation/content-factory-v1/api/requirements.txt` и устанавливаются автоматически при сборке Docker-образа. Для локального Python-окружения можно выполнить `python -m pip install -r requirements.txt`: корневой файл подключает тот же список. Worker и Telegram publisher используют стандартную библиотеку Python; на Windows для часовых поясов добавлен `tzdata`.
+
 ### Запуск локального API и PostgreSQL
 
-В PowerShell задайте собственные локальные значения (для пароля используйте только латинские буквы и цифры):
+Скопируйте шаблон `.env.example` в `.env` и задайте собственные `CONTENT_FACTORY_DB_PASSWORD` и `CONTENT_FACTORY_WORKER_TOKEN`. Для пароля используйте латинские буквы и цифры. Не публикуйте `.env`.
 
 ```powershell
-$env:CONTENT_FACTORY_DB_PASSWORD = 'придумайте_пароль_латиницей_и_цифрами'
-$env:CONTENT_FACTORY_WORKER_TOKEN = 'придумайте_локальный_токен'
+Copy-Item .env.example .env
+notepad .env
 ```
 
 Затем в том же окне выполните:
 
 ```powershell
-docker compose -p content-factory-v1 -f automation\content-factory-v1\docker-compose.yml up -d --build
+docker compose --env-file .env -p content-factory-v1 -f automation\content-factory-v1\docker-compose.yml up -d --build
 ```
 
 После запуска:
@@ -114,6 +116,8 @@ docker compose -p content-factory-v1 -f automation\content-factory-v1\docker-com
 - PostgreSQL: `127.0.0.1:55432`.
 
 Эта команда запускает API и базу данных. Worker, Codex CLI и интеграции Notion, n8n и Telegram настраиваются отдельно; весь рабочий контур не разворачивается одной командой.
+
+В `.env.example` также перечислены `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID` для отдельного Telegram publisher и идентификаторы для собственных сценариев n8n. Python-скрипты не загружают `.env` автоматически: задайте нужные значения в окружении процесса. Учётные данные Notion и Telegram настраиваются в Credentials своего n8n, а идентификаторы — в его окружении или сценариях. Рабочие workflow не входят в репозиторий, поэтому одних переменных недостаточно для их восстановления.
 
 ### Локальные тесты
 
@@ -126,7 +130,7 @@ python -m unittest discover -s automation\content-factory-v1\worker\tests -v
 ### Остановка
 
 ```powershell
-docker compose -p content-factory-v1 -f automation\content-factory-v1\docker-compose.yml stop
+docker compose --env-file .env -p content-factory-v1 -f automation\content-factory-v1\docker-compose.yml stop
 ```
 
 Команда `down -v` удаляет локальные данные базы и без отдельного решения не используется.

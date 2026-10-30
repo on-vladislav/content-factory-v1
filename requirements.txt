@@ -1,0 +1,5 @@
+# API dependencies; Docker installs the same file when building the API image.
+-r automation/content-factory-v1/api/requirements.txt
+# Windows does not always include the IANA timezone database used by zoneinfo.
+tzdata>=2024.1; sys_platform == 'win32'
+
